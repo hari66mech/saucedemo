@@ -21,8 +21,9 @@ def home(driver):
     driver.get(Constant.HOME_PAGE_URL)
 
 
-@when("Login as the standard_user credential")
+@when("Login as the standard_user credential", target_fixture="home_page")
 def login(driver):
+    home_page_url = driver.current_url
     driver.maximize_window()
     # userName
     user_name = driver.find_element_by_xpath(Login.user_name_loc)
@@ -37,9 +38,11 @@ def login(driver):
     driver.find_element_by_xpath(Login.Add_card_loc.format(random.randrange(1, 7))).click()
     # navigate to card page
     driver.find_element_by_xpath(Login.shopping_bucket_icon_loc).click()
+    return home_page_url
 
 
 @then("Redirect to the card page")
-def results(driver):
+def results(driver, home_page):
+    assert home_page == Constant.HOME_PAGE_URL
     assert driver.title == Constant.CARD_PAGE_TITLE
     assert driver.current_url == Constant.CARD_PAGE_URL
