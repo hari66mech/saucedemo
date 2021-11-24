@@ -8,6 +8,6 @@ class Login:
     error_text_loc = "//h3[@data-test='error']"
 
     # input
-    student_user_text = "standard_user"
+    standard_user_text = "standard_user"
     locked_out_user_text = "locked_out_user"
     login_password_text = "secret_sauce"

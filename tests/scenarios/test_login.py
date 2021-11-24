@@ -27,7 +27,7 @@ def login(driver):
     driver.maximize_window()
     # userName
     user_name = driver.find_element_by_xpath(Login.user_name_loc)
-    user_name.send_keys(Login.student_user_text)
+    user_name.send_keys(Login.standard_user_text)
     # password
     password = driver.find_element_by_xpath(Login.password_loc)
     password.send_keys(Login.login_password_text)
