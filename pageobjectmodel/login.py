@@ -6,4 +6,3 @@ class Login:
     add_card_loc = "//div[@class='inventory_list']/child::div[{}]//child::button"
     shopping_bucket_icon_loc = "//a[@class='shopping_cart_link']"
     error_text_loc = "//h3[@data-test='error']"
-
