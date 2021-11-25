@@ -14,4 +14,4 @@ def driver():
 
 @given('The saucedemo login page is displayed')
 def home(driver):
-    driver.get(Constant.HOME_PAGE_URL)
+    driver.get(Constant.LOGIN_PAGE_URL)
