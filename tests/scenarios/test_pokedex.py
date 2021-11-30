@@ -17,6 +17,7 @@ def calculate_total_pokemon(driver):
     Pokeman(driver).length_of_the_list()
 
 
+
 @when(parsers.parse("I am searching {text} pokeman"))
 def search_pokemon_name(driver, text):
     """This method is used to search the particular pokeman"""
