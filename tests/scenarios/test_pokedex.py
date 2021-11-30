@@ -10,6 +10,7 @@ def pokedex_page(driver):
     driver.get('https://pokedex.org/')
 
 
+
 @when("I am calculating the total pokeman")
 def calculate_total_pokemon(driver):
     """This method is used to calculate the total pokeman"""
