@@ -6,3 +6,5 @@ class Constant:
     USER_HOME = "C:" + os.path.sep + "Users" + os.path.sep + "harikrishna.manokara" + os.path.sep + "PycharmProjects" + os.path.sep + "saucedemo" + os.path.sep
     DRIVER_PATH = USER_HOME + 'driver' + os.path.sep + 'chromedriver.exe'
     TOTAL_POKEDEXS = 649
+    PIKACHU_URL_PAGE = "https://pokedex.org/#/pokemon/25"
+    MAXIMUM_ATTEMPTS = 3

@@ -1,6 +1,4 @@
-import time
-
-from pytest_bdd import scenarios, given, when, parsers
+from pytest_bdd import scenarios, given, when, parsers, then
 from pageobjectmodel.pokeman import Pokeman
 
 scenarios('../features/pokedex_scenarios_outline.feature')
@@ -22,3 +20,18 @@ def calculate_total_pokemon(driver):
 def search_pokemon_name(driver, text):
     """This method is used to search the particular pokeman"""
     Pokeman(driver).search_pokeman(text)
+
+
+@when(parsers.parse("I am {action} Pikachu pokeman"))
+def search_and_click_pikachu(driver, action):
+    """This method is used to search and click the pikachu pokeman"""
+    if action == "searching":
+        Pokeman(driver).search_Pikachu()
+    elif action == "clicking":
+        Pokeman(driver).click_pikachu()
+
+
+@then("I am verifying the page url")
+def verify_pokeman_page_url(driver):
+    """This class used to verify current URL"""
+    Pokeman(driver).verify_url()
