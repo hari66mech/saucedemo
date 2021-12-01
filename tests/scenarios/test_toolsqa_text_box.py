@@ -4,7 +4,7 @@ from pytest_bdd.exceptions import StepDefinitionNotFoundError
 from constants.constant import Constant
 from pageobjectmodel.toolsqa_text_box import Toolsqa_text_box
 
-scenarios("C:/Users/harikrishna.manokara/PycharmProjects/saucedemo/tests/features/toolsqa_text_box.feature")
+scenarios("C:/Users/harikrishna.manokara/PycharmProjects/pytest_bdd_training/tests/features/toolsqa_text_box.feature")
 
 
 @given("The demoqa text page is displayed")

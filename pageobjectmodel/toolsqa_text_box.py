@@ -1,5 +1,6 @@
+import faker
 from selenium.webdriver.common.by import By
-from factory.faker import faker
+
 
 
 class Toolsqa_text_box:
