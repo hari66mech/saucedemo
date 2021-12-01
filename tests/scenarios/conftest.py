@@ -1,14 +1,14 @@
 import pytest
 
 from selenium import webdriver
-from constants.constant import Constant
+from driver.config import Config
 
 
 @pytest.fixture
 def driver():
     """This method is used to open and close the chrome driver"""
-    driver = webdriver.Chrome(Constant.DRIVER_PATH)
-    driver.implicitly_wait(10)
+    driver = webdriver.Chrome(Config.DRIVER_PATH)
     driver.maximize_window()
+    driver.implicitly_wait(10)
     yield driver
     driver.quit()
