@@ -8,24 +8,37 @@ scenarios("C:/Users/harikrishna.manokara/PycharmProjects/pytest_bdd_training/tes
 
 
 @given('The jpetstore demo login page is displayed')
-def home(driver):
+def login_page(driver):
     """This method is used to go to the login page"""
     driver.get(Constant.LOGIN_PAGE_URL)
+
+
+@when('I click the register link')
+def click_register_now(driver):
+    """This method used to click the 'register now' link"""
+    Pets_order(driver).click_register_now()
 
 
 @when(parsers.parse("I fill the user information"))
 def login_standard_user(driver):
     """This method is used to register with user information"""
-    Pets_order(driver).user_information()
+    global credential
+    credential = Pets_order(driver).user_information()
     Pets_order(driver).account_information()
     Pets_order(driver).profile_information()
 
 
-@when("Navigate to jpetstore demo home page")
+@then("I navigate to jpetstore demo home page")
 def validate_home_page(driver):
     """This method is used to validate page navigation"""
     Pets_order(driver).click_save_account_information()
     assert driver.current_url == Constant.HOME_PAGE_URL
+
+
+@when("I login with valid credential")
+def login(driver):
+    """This method is used to login with valid credential"""
+    Pets_order(driver).log_in(credential)
 
 
 @when(parsers.parse("I select the {count} pet"))
@@ -66,7 +79,7 @@ def return_main_menu(driver):
     Pets_order(driver).click_return_to_main_menu()
 
 
-@then("I calculate the cost of each item and compare with  the total")
+@then("I validate the total amount")
 def calculate_total_price(driver):
     """This method is used to calculate the pets price and compare with total price"""
     Pets_order(driver).calculate_the_price()
@@ -80,7 +93,7 @@ def order_the_pets(driver):
     Pets_order(driver).click_confirm_button()
 
 
-@then("Verify my order is placed")
+@then("I validate my order is placed")
 def verify_order(driver):
     """This method used to verify my order is placed"""
     Pets_order(driver).verify_confirmation_message()

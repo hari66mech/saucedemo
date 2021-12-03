@@ -11,6 +11,7 @@ class Pets_order:
     fake = Faker(locale='en_IN')
 
     # locator
+    register_now_loc = (By.XPATH, "//a[normalize-space()='Register Now!']")
     user_id_loc = (By.XPATH, "//input[@name='username']")
     new_password_loc = (By.XPATH, "//input[@name='password']")
     repeat_password_loc = (By.XPATH, "//input[@name='repeatedPassword']")
@@ -39,154 +40,183 @@ class Pets_order:
     confirm_button_loc = (By.XPATH, "//a[@class='Button']")
     total_bill_amount_loc = (By.XPATH, "//th[contains(text(),'Total:')]")
     thank_you_text_loc = (By.XPATH, "//li[normalize-space()='Thank you, your order has been submitted.']")
+    user_name_loc = (By.XPATH, "//input[@name='username']")
+    password_loc = (By.XPATH, "//input[@name='password']")
+    login_loc = (By.XPATH, "//input[@name='signon']")
+
+    @property
+    def register_now(self):
+        """This property used to find the 'register now' XPath"""
+        return self.driver.find_element(*self.register_now_loc)
 
     @property
     def user_id(self):
-        """This method used to find the user id field XPath"""
+        """This property used to find the user id field XPath"""
         return self.driver.find_element(*self.user_id_loc)
 
     @property
     def new_password(self):
-        """This method used to find the new password field XPath"""
+        """This property used to find the new password field XPath"""
         return self.driver.find_element(*self.new_password_loc)
 
     @property
     def repeat_password(self):
-        """This method used to find the repeat password field XPath"""
+        """This property used to find the repeat password field XPath"""
         return self.driver.find_element(*self.repeat_password_loc)
 
     @property
     def first_name(self):
-        """This method used to find the first name field XPath"""
+        """This property used to find the first name field XPath"""
         return self.driver.find_element(*self.first_name_loc)
 
     @property
     def last_name(self):
-        """This method used to find the last name field XPath"""
+        """This property used to find the last name field XPath"""
         return self.driver.find_element(*self.last_name_loc)
 
     @property
     def email(self):
-        """This method used to find the email id field XPath"""
+        """This property used to find the email id field XPath"""
         return self.driver.find_element(*self.email_id_loc)
 
     @property
     def phone_number(self):
-        """This method used to find the phone number field XPath"""
+        """This property used to find the phone number field XPath"""
         return self.driver.find_element(*self.phone_number_loc)
 
     @property
     def address_1(self):
-        """This method used to find the first address field XPath"""
+        """This property used to find the first address field XPath"""
         return self.driver.find_element(*self.address_1_loc)
 
     @property
     def address_2(self):
-        """This method used to find the second address field XPath"""
+        """This property used to find the second address field XPath"""
         return self.driver.find_element(*self.address_2_loc)
 
     @property
     def city(self):
-        """This method used to find the city field XPath"""
+        """This property used to find the city field XPath"""
         return self.driver.find_element(*self.city_loc)
 
     @property
     def state(self):
-        """This method used to find the state field XPath"""
+        """This property used to find the state field XPath"""
         return self.driver.find_element(*self.state_loc)
 
     @property
     def zip(self):
-        """This method used to find the zip field XPath"""
+        """This property used to find the zip field XPath"""
         return self.driver.find_element(*self.zip_loc)
 
     @property
     def country(self):
-        """This method used to find the country field XPath"""
+        """This property used to find the country field XPath"""
         return self.driver.find_element(*self.country_loc)
 
     @property
     def mylist(self):
-        """This method used to find the enable mylist checkbox XPath"""
+        """This property used to find the enable mylist checkbox XPath"""
         return self.driver.find_element(*self.enable_mylist_loc)
 
     @property
     def mybanner(self):
-        """This method used to find the enable mybanner checkbox XPath"""
+        """This property used to find the enable mybanner checkbox XPath"""
         return self.driver.find_element(*self.enable_mybanner_loc)
 
     @property
     def save_account_information(self):
-        """This method used to find the 'save account information' button XPath"""
+        """This property used to find the 'save account information' button XPath"""
         return self.driver.find_element(*self.save_account_information_loc)
 
     @property
     def select_pets_category(self):
-        """This method used to find the common pets category XPath"""
+        """This property used to find the common pets category XPath"""
         return self.driver.find_elements(*self.select_pets_category_loc)
 
     @property
     def select_sub_pets_category(self):
-        """This method used to find the common sub pets category XPath"""
+        """This property used to find the common sub pets category XPath"""
         return self.driver.find_elements(*self.select_sub_pets_loc)
 
     @property
     def select_specific_pet(self):
-        """This method used to find the common pets XPath"""
+        """This property used to find the common pets XPath"""
         return self.driver.find_elements(*self.select_specific_pet_loc)
 
     @property
     def add_cart(self):
-        """This method used to find the add cart button XPath"""
+        """This property used to find the add cart button XPath"""
         return self.driver.find_element(*self.add_cart_loc)
 
     @property
     def return_to_main_menu(self):
-        """This method used to find the 'return to main menu' button XPath"""
+        """This property used to find the 'return to main menu' button XPath"""
         return self.driver.find_element(*self.return_to_main_menu_loc)
 
     @property
     def pets_price(self):
-        """This method used to find the pets price XPath"""
+        """This property used to find the pets price XPath"""
         return self.driver.find_elements(*self.pets_price_loc)
 
     @property
     def total_price(self):
-        """This method used to find the total price XPath"""
+        """This property used to find the total price XPath"""
         return self.driver.find_element(*self.total_price_loc)
 
     @property
     def proceed_to_checkout(self):
-        """This method used to find the checkout button XPath"""
+        """This property used to find the checkout button XPath"""
         return self.driver.find_element(*self.proceed_to_checkout_loc)
 
     @property
     def continue_button(self):
-        """This method used to find the continue button XPath"""
+        """This property used to find the continue button XPath"""
         return self.driver.find_element(*self.continue_button_loc)
 
     @property
     def confirm_button(self):
-        """This method used to find the confirm button XPath"""
+        """This property used to find the confirm button XPath"""
         return self.driver.find_element(*self.confirm_button_loc)
 
     @property
     def thank_you_text(self):
-        """This method used to find the thank you message text XPath"""
+        """This property used to find the thank you message text XPath"""
         return self.driver.find_element(*self.thank_you_text_loc)
 
     @property
     def total_bill_amount(self):
-        """This method used to find the total bill XPath"""
+        """This property used to find the total bill XPath"""
         return self.driver.find_element(*self.total_bill_amount_loc)
+
+    @property
+    def user_name(self):
+        """This property used to find the user name XPath in signin page"""
+        return self.driver.find_element(*self.user_name_loc)
+
+    @property
+    def password(self):
+        """This property used to find the password XPath in signin page"""
+        return self.driver.find_element(*self.password_loc)
+
+    @property
+    def login(self):
+        """This property used to find the login button XPath in signin page"""
+        return self.driver.find_element(*self.login_loc)
+
+    def click_register_now(self):
+        """This method used to click the 'register now'"""
+        self.register_now.click()
 
     def user_information(self):
         """This method used to fill the user information"""
         password = self.fake.password()
-        user_id = random.randrange(1000, 9999)
+        user_id = self.fake.random_int()
+        credential = [user_id, password]
         self.user_id.send_keys(user_id)
         self.new_password.send_keys(password)
         self.repeat_password.send_keys(password)
+        return credential
 
     def account_information(self):
         """This method used to fill the account information"""
@@ -277,3 +307,11 @@ class Pets_order:
     def check_total_bill_amount(self):
         """This method is used to check the total bill amount is displayed in order page"""
         self.total_bill_amount.is_displayed()
+
+    def log_in(self, credential):
+        """This method is used to login with valid credential"""
+        self.user_name.clear()
+        self.user_name.send_keys(credential[0])
+        self.password.clear()
+        self.password.send_keys(credential[1])
+        self.login.click()
