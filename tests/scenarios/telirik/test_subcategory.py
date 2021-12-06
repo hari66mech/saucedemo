@@ -9,7 +9,6 @@ scenarios("C:/Users/harikrishna.manokara/PycharmProjects/demo/tests/features/tel
 def click_subcategory(driver):
     """This method used to click the subcategory"""
     Demo(driver).click_subcategory()
-    time.sleep(5)
 
 
 @then("I validate the selected category heading")

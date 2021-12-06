@@ -1,5 +1,4 @@
 import random
-
 from selenium.webdriver.common.by import By
 from faker import Faker
 from selenium.webdriver.support.select import Select
