@@ -1,4 +1,3 @@
-import time
 from pytest_bdd import when, scenarios, then
 from pageobjectmodel.telirik.demo_page import Demo
 
