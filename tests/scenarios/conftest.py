@@ -1,4 +1,7 @@
+import time
+
 import pytest
+from pytest_bdd.exceptions import StepDefinitionNotFoundError
 
 from selenium import webdriver
 from driver.config import Driver
@@ -31,29 +34,41 @@ def log_in(driver):
     Login(driver).login()
 
 
-@then("I validate home page")
-@when("I validate home page")
+@when("I validate the home page")
+@then("I validate the home page")
 def validate_home_page(driver):
     """This method is used to validate the home page url"""
     Home(driver).validate_home_page()
 
 
-@when(parsers.parse('I select {count} randomly'))
+@when(parsers.parse('I add {count} to the cart'))
 def add_items(driver, count):
     """This method is used to add items to cart"""
-    lists = Home(driver).get_random_list()
-    if count == "one item" or count == "two items" or count == "three items":
-        Home(driver).add_to_cart(lists[0])
-    if count == "two items" or count == "three items":
-        Home(driver).add_to_cart(lists[1])
-    if count == "three items":
-        Home(driver).add_to_cart(lists[2])
+
+    global items
+    if count == "an item":
+        items = Home(driver).get_random_list(Constant.ONE_ITEM)
+    elif count == "two items":
+        items = Home(driver).get_random_list(Constant.TWO_ITEM)
+    elif count == "three items":
+        items = Home(driver).get_random_list(Constant.THREE_ITEM)
+    else:
+        try:
+            raise StepDefinitionNotFoundError
+        except StepDefinitionNotFoundError:
+            pass
+    Home(driver).add_to_cart(items)
 
 
 @then(parsers.parse('I validate the {items_count} added to cart'))
 def validate_items_count(driver, items_count):
     """This method is used to validate added items count"""
     if items_count == "three items":
-        Cart(driver).verify_shopping_items_count(3)
+        Cart(driver).verify_shopping_items_count(Constant.THREE_ITEM)
     elif items_count == "one item":
-        Cart(driver).verify_shopping_items_count(1)
+        Cart(driver).verify_shopping_items_count(Constant.ONE_ITEM)
+    else:
+        try:
+            raise StepDefinitionNotFoundError
+        except StepDefinitionNotFoundError:
+            pass

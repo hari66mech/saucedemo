@@ -4,4 +4,5 @@ class Constant:
     PASSWORD = "secret_sauce"
     HOME_PAGE_URL = "https://www.saucedemo.com/inventory.html"
     ONE_ITEM = 1
+    TWO_ITEM = 2
     THREE_ITEM = 3
