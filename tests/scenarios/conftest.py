@@ -1,5 +1,3 @@
-import time
-
 import pytest
 from pytest_bdd.exceptions import StepDefinitionNotFoundError
 
@@ -37,7 +35,7 @@ def log_in(driver):
 @when("I validate the home page")
 @then("I validate the home page")
 def validate_home_page(driver):
-    """This method is used to validate the home page url"""
+    """This method is used to validate the home page"""
     Home(driver).validate_home_page()
 
 
@@ -60,12 +58,12 @@ def add_items(driver, count):
     Home(driver).add_to_cart(items)
 
 
-@then(parsers.parse('I validate the {items_count} added to cart'))
-def validate_items_count(driver, items_count):
-    """This method is used to validate added items count"""
-    if items_count == "three items":
+@then(parsers.parse('I validate the {item_count} added to cart'))
+def validate_items_count(driver, item_count):
+    """This method is used to validate added item count"""
+    if item_count == "three items":
         Cart(driver).verify_shopping_items_count(Constant.THREE_ITEM)
-    elif items_count == "one item":
+    elif item_count == "one item":
         Cart(driver).verify_shopping_items_count(Constant.ONE_ITEM)
     else:
         try:

@@ -18,6 +18,12 @@ def click_shopping_bucket_icon(driver):
     Home(driver).click_shopping_icon()
 
 
+@when("I validate cart page title")
+def validate_cart_page(driver):
+    """This method used to validate the cart page"""
+    Cart(driver).cart_page_title()
+
+
 @when("I click the continue shopping button")
 def continue_shopping(driver):
     """This method is used to click continue shopping button"""

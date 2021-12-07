@@ -1,5 +1,6 @@
 import random
 from selenium.webdriver.common.by import By
+from constants.constant import Constant
 
 
 class Cart:
@@ -10,6 +11,7 @@ class Cart:
     continue_shopping_loc = (By.XPATH, "//button[@id='continue-shopping']")
     cart_items_loc = (By.XPATH, "//div[@class='cart_item']")
     shopping_icon_loc = (By.XPATH, "//a[@class='shopping_cart_link']")
+    title_loc = (By.XPATH, "//span[@class='title']")
 
     @property
     def continue_shopping(self):
@@ -22,6 +24,10 @@ class Cart:
     @property
     def shopping_icon(self):
         return self.driver.find_element(*self.shopping_icon_loc)
+
+    @property
+    def page_title(self):
+        return self.driver.find_element(*self.title_loc)
 
     def verify_shopping_items_count(self, count):
         """This method is used to validate added items count"""
@@ -36,3 +42,7 @@ class Cart:
     def click_continue_shopping(self):
         """This method is used to click continue shopping button"""
         self.continue_shopping.click()
+
+    def cart_page_title(self):
+        """This method used to validate the cart page"""
+        assert self.page_title.text == Constant.CARD_PAGE_TITLE

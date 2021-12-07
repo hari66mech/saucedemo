@@ -8,6 +8,7 @@ Feature: shopping items manipulation
     And I validate the home page
     And I add three items to the cart
     And I click the shopping icon
+    And I validate cart page title
     Then I validate the three items added to cart
 
   Scenario: Verify the number of items available to the card
