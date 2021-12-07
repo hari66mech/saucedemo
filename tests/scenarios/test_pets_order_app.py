@@ -17,7 +17,7 @@ def login_page(driver):
 
 
 @when('I click the register link')
-def click_register_now(driver):
+def click_register(driver):
     """This method used to click the 'register now' link"""
     Login(driver).click_register_now()
 
