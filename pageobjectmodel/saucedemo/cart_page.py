@@ -1,6 +1,5 @@
 import random
 from selenium.webdriver.common.by import By
-
 from pageobjectmodel.saucedemo.shopping_page import Home
 
 
@@ -30,8 +29,9 @@ class Cart(Home):
 
     def remove_item(self):
         """This method is used to remove item from the cart"""
-        random_item = random.randrange(1, len(self.cart_items)+1)
-        random_item_xpath = "//div[@class='cart_list']/div[@class='cart_item']["+str(random_item)+"]//button[text()]"
+        random_item = random.randrange(1, len(self.cart_items) + 1)
+        random_item_xpath = "//div[@class='cart_list']/div[@class='cart_item'][" + str(
+            random_item) + "]//button[text()]"
         self.driver.find_element_by_xpath(random_item_xpath).click()
 
     def click_continue_shopping(self):

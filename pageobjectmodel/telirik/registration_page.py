@@ -2,7 +2,7 @@ import random
 from selenium.webdriver.common.by import By
 from faker import Faker
 from selenium.webdriver.support.select import Select
-from constants.telirik.constant import Constant
+from constants.telirik.page_action import Page_action
 
 
 class Registration:
@@ -61,5 +61,5 @@ class Registration:
         sel = Select(self.common_country)
         sel.select_by_index(random.randrange(1, len(self.countries)))
         self.phone_number.send_keys(self.fake.phone_number())
-        self.driver.execute_script(Constant.WINDOW_SCROLL_SCRIPT)
+        self.driver.execute_script(Page_action.WINDOW_SCROLL_SCRIPT)
         self.create_account_button.click()

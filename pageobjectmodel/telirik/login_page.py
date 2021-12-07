@@ -1,5 +1,5 @@
 from selenium.webdriver.common.by import By
-from constants.telirik.constant import Constant
+from constants.telirik.page_action import Page_action
 
 
 class Login:
@@ -14,5 +14,5 @@ class Login:
 
     def click_create_account_link(self):
         """This method is used to click create account link"""
-        self.driver.execute_script(Constant.WINDOW_SCROLL_SCRIPT)
+        self.driver.execute_script(Page_action.WINDOW_SCROLL_SCRIPT)
         self.create_account_link.click()
