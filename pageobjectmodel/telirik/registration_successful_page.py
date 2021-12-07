@@ -1,5 +1,5 @@
 from selenium.webdriver.common.by import By
-from constants.telirik.constant import Constant
+from constants.telirik.telerik_constant import Telerik_constant
 
 
 class Registration_success:
@@ -14,4 +14,4 @@ class Registration_success:
 
     def validate_thank_you_message(self):
         """This method is used to validate the success message"""
-        assert self.thank_you_message.text == Constant.THANK_YOU_MESSAGE
+        assert self.thank_you_message.text == Telerik_constant.THANK_YOU_MESSAGE

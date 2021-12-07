@@ -15,7 +15,7 @@ class Registration:
     first_name_loc = (By.XPATH, "//input[@id='Textbox-1']")
     last_name_loc = (By.XPATH, "//input[@id='Textbox-2']")
     company_name_loc = (By.XPATH, "//input[@id='Textbox-3']")
-    country_commen_loc = (By.XPATH, "//select[@id='Country-1']")
+    country_dropdown_loc = (By.XPATH, "//select[@id='Country-1']")
     countries_loc = (By.XPATH, "//select[@id='Country-1']/option")
     phone_number_loc = (By.XPATH, "//input[@id='Textbox-4']")
     create_account_button_loc = (By.XPATH, "//button[normalize-space()='Create account']")
@@ -37,8 +37,8 @@ class Registration:
         return self.driver.find_element(*self.company_name_loc)
 
     @property
-    def common_country(self):
-        return self.driver.find_element(*self.country_commen_loc)
+    def country_dropdown(self):
+        return self.driver.find_element(*self.country_dropdown_loc)
 
     @property
     def countries(self):
@@ -58,8 +58,8 @@ class Registration:
         self.first_name.send_keys(self.fake.first_name())
         self.last_name.send_keys(self.fake.last_name())
         self.company_name.send_keys(self.fake.company())
-        sel = Select(self.common_country)
-        sel.select_by_index(random.randrange(1, len(self.countries)))
+        country_selection = Select(self.country_dropdown)
+        country_selection.select_by_index(random.randrange(1, len(self.countries)))
         self.phone_number.send_keys(self.fake.phone_number())
         self.driver.execute_script(Page_action.WINDOW_SCROLL_SCRIPT)
         self.create_account_button.click()

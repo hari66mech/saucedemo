@@ -1,5 +1,4 @@
 from pytest_bdd import when, scenarios, then
-
 from pageobjectmodel.telirik.demo_page import Demo
 from pageobjectmodel.telirik.login_page import Login
 from pageobjectmodel.telirik.registration_page import Registration
@@ -8,19 +7,19 @@ from pageobjectmodel.telirik.registration_successful_page import Registration_su
 scenarios("C:/Users/harikrishna.manokara/PycharmProjects/demo/tests/features/telerik/telirik.feature")
 
 
-@when('I click the your account icon on demo page')
+@when('I click the account icon on the demo page')
 def click_account_icon(driver):
     """This method used to click the your account icon"""
     Demo(driver).click_your_account_icon()
 
 
-@when("I click create an account for free on login page")
+@when("I click the create_account_button on the login page")
 def click_create_account(driver):
     """This method is used to click the create an account for free"""
     Login(driver).click_create_account_link()
 
 
-@when("I fill the details on account creation page")
+@when("I fill in the details on the registration page")
 def registration(driver):
     """This method used to fill the details for account creation"""
     Registration(driver).create_account()

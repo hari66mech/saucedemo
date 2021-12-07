@@ -1,6 +1,6 @@
 import random
 from selenium.webdriver.common.by import By
-from constants.saucedemo.constant import Constant
+from constants.saucedemo.sauce_constant import Sauce_constant
 
 
 class Home:
@@ -9,6 +9,7 @@ class Home:
 
     items_list_loc = (By.XPATH, "//div[@class='inventory_list']//button")
     shopping_icon_loc = (By.XPATH, "//a[@class='shopping_cart_link']")
+    select_item_loc = "//div[@class='inventory_list']/child::div[{0}]//child::button"
 
     @property
     def items_list(self):
@@ -31,8 +32,7 @@ class Home:
     def add_to_cart(self, items):
         """This method is used to add items to cart"""
         for item in items:
-            item_xpath = "//div[@class='inventory_list']/child::div[" + str(item) + "]//child::button"
-            self.driver.find_element_by_xpath(item_xpath).click()
+            self.driver.find_element_by_xpath(self.select_item_loc.format(str(item))).click()
 
     def click_shopping_icon(self):
         """This method is used to click shopping icon"""
@@ -40,4 +40,4 @@ class Home:
 
     def validate_home_page(self):
         """This method is used to validate the home page url"""
-        assert self.driver.current_url == Constant.HOME_PAGE_URL
+        assert self.driver.current_url == Sauce_constant.HOME_PAGE_URL

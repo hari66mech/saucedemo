@@ -5,7 +5,7 @@ scenarios("C:/Users/harikrishna.manokara/PycharmProjects/demo/tests/features/tel
 
 
 @when('I click the demos subcategory in demo page')
-def click_subcategory(driver):
+def click_the_subcategory_link(driver):
     """This method used to click the subcategory"""
     Demo(driver).click_subcategory()
 
@@ -13,4 +13,4 @@ def click_subcategory(driver):
 @then("I validate the selected category heading")
 def validate_heading(driver):
     """This method is used to validate the heading with selected category"""
-    Demo(driver).verify_header()
+    Demo(driver).verify_header_title()

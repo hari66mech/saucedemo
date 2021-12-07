@@ -8,6 +8,8 @@ class Demo:
 
     your_account_icon_loc = (By.XPATH, "//a[@title='Your Account']")
     demos_subcategory_loc = (By.XPATH, "//div[@data-tlrk-plugin='navspy']/a")
+    subcategory_loc = "//div[@data-tlrk-plugin='navspy']/a[{0}]"
+    subcategory_heading_loc = "//h3[text()][{0}]"
 
     @property
     def your_account_icon(self):
@@ -27,10 +29,10 @@ class Demo:
         global category_name
         subcategories_count = len(self.demos_subcategory)
         category_position = random.randrange(1, subcategories_count)
-        category_name = self.driver.find_element_by_xpath("//div[@data-tlrk-plugin='navspy']/a[" + str(category_position) + "]")
+        category_name = self.driver.find_element_by_xpath(self.subcategory_loc.format(str(category_position)))
         category_name.click()
 
-    def verify_header(self):
+    def verify_header_title(self):
         """This method is used to validate the heading with selected category"""
-        subcategory_heading = self.driver.find_element_by_xpath("//h3[text()]["+str(category_position)+"]")
+        subcategory_heading = self.driver.find_element_by_xpath(self.subcategory_heading_loc.format(category_position))
         assert subcategory_heading.text == category_name.text

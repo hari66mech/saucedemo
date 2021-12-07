@@ -1,5 +1,5 @@
 from selenium.webdriver.common.by import By
-from constants.saucedemo.constant import Constant
+from constants.saucedemo.sauce_constant import Sauce_constant
 
 
 class Login:
@@ -24,6 +24,6 @@ class Login:
 
     def login(self):
         """This method is used to login with standard credential"""
-        self.user_name.send_keys(Constant.STANDARD_USER)
-        self.password.send_keys(Constant.PASSWORD)
+        self.user_name.send_keys(Sauce_constant.STANDARD_USER)
+        self.password.send_keys(Sauce_constant.PASSWORD)
         self.login_button.click()
