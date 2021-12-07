@@ -1,5 +1,4 @@
 from pytest_bdd import scenarios, when
-
 from pageobjectmodel.cart_page import Cart
 from pageobjectmodel.home_page import Home
 

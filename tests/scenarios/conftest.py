@@ -1,6 +1,5 @@
 import pytest
 from pytest_bdd.exceptions import StepDefinitionNotFoundError
-
 from selenium import webdriver
 from driver.config import Driver
 from pytest_bdd import when, given, parsers, then
@@ -26,7 +25,7 @@ def get_login_page(driver):
     driver.get(Constant.LOGIN_PAGE_URL)
 
 
-@when('I login with standard user credential')
+@when('I login as a standard user')
 def log_in(driver):
     """This method used to login with standard user credential"""
     Login(driver).login()
@@ -42,13 +41,12 @@ def validate_home_page(driver):
 @when(parsers.parse('I add {count} to the cart'))
 def add_items(driver, count):
     """This method is used to add items to cart"""
-
     global items
-    if count == "an item":
+    if count == "an_item":
         items = Home(driver).get_random_list(Constant.ONE_ITEM)
-    elif count == "two items":
+    elif count == "two_items":
         items = Home(driver).get_random_list(Constant.TWO_ITEM)
-    elif count == "three items":
+    elif count == "three_items":
         items = Home(driver).get_random_list(Constant.THREE_ITEM)
     else:
         try:
@@ -58,12 +56,12 @@ def add_items(driver, count):
     Home(driver).add_to_cart(items)
 
 
-@then(parsers.parse('I validate the {item_count} added to cart'))
+@then(parsers.parse('I validate {item_count} added in the cart'))
 def validate_items_count(driver, item_count):
     """This method is used to validate added item count"""
-    if item_count == "three items":
+    if item_count == "three_items":
         Cart(driver).verify_shopping_items_count(Constant.THREE_ITEM)
-    elif item_count == "one item":
+    elif item_count == "one_item":
         Cart(driver).verify_shopping_items_count(Constant.ONE_ITEM)
     else:
         try:

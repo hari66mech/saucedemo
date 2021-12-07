@@ -10,6 +10,7 @@ class Home:
     items_list_loc = (By.XPATH, "//div[@class='inventory_list']//button")
     shopping_icon_loc = (By.XPATH, "//a[@class='shopping_cart_link']")
     product_page_title_loc = (By.XPATH, "//span[@class='title']")
+    select_item_loc = "//div[@class='inventory_list']/child::div[{0}]//child::button"
 
     @property
     def items_list(self):
@@ -23,11 +24,14 @@ class Home:
     def product_page_title(self):
         return self.driver.find_element(*self.product_page_title_loc)
 
+    @property
+    def total_items(self):
+        return len(self.items_list)
+
     def get_random_list(self, count):
         """This method is used to get total items and create random items list"""
         random_list = []
-        items_count = len(self.items_list)
-        for item_position in range(1, items_count + 1):
+        for item_position in range(1, self.total_items + 1):
             random_list.append(item_position)
         random_list = random.sample(random_list, count)
         return random_list
@@ -35,8 +39,7 @@ class Home:
     def add_to_cart(self, items):
         """This method is used to add items to cart"""
         for item in items:
-            item_xpath = "//div[@class='inventory_list']/child::div[" + str(item) + "]//child::button"
-            self.driver.find_element_by_xpath(item_xpath).click()
+            self.driver.find_element_by_xpath(self.select_item_loc.format(str(item))).click()
 
     def click_shopping_icon(self):
         """This method is used to click shopping icon"""
