@@ -1,6 +1,5 @@
 from pytest_bdd import scenarios, when, given, parsers, then
 from pytest_bdd.exceptions import StepDefinitionNotFoundError
-
 from constants.constant import Constant
 from pageobjectmodel.cart_page import Cart
 from pageobjectmodel.confirm_page import Confirm
@@ -8,7 +7,7 @@ from pageobjectmodel.login_page import Login
 from pageobjectmodel.registration_page import Registration
 from pageobjectmodel.shopping_page import Shopping
 
-scenarios("C:/Users/harikrishna.manokara/PycharmProjects/saucedemo1/tests/features/pets_order_app.feature")
+scenarios("C:/Users/harikrishna.manokara/PycharmProjects/demo/tests/features/pets_order_app.feature")
 
 
 @given('The jpetstore demo login page is displayed')
@@ -45,36 +44,24 @@ def login(driver):
     Login(driver).log_in(credential)
 
 
-@when(parsers.parse("I select the {count} pet"))
+@when(parsers.parse("I add the {count} pet to the cart"))
 def select_pet(driver, count):
     """This method is used to select pets randomly"""
     if count == "first":
         Shopping(driver).click_pets_category()
         Shopping(driver).click_pets_subcategory()
         Shopping(driver).click_specific_pet()
+        Cart(driver).click_add_card()
     elif count == "second":
         Shopping(driver).click_pets_category()
         Shopping(driver).click_pets_subcategory()
         Shopping(driver).click_specific_pet()
-    else:
-        try:
-            raise StepDefinitionNotFoundError
-        except StepDefinitionNotFoundError:
-            print("StepDefinitionNotFoundError")
-
-
-@when(parsers.parse("I add the {count} pet to the cart"))
-def add_to_cart(driver, count):
-    """This method is used to add pets to cart"""
-    if count == "first":
-        Cart(driver).click_add_card()
-    elif count == "second":
         Cart(driver).click_add_card()
     else:
         try:
             raise StepDefinitionNotFoundError
         except StepDefinitionNotFoundError:
-            print("StepDefinitionNotFoundError")
+            pass
 
 
 @when("I return to the home page")
