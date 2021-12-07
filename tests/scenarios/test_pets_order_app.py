@@ -22,19 +22,19 @@ def click_register(driver):
     Login(driver).click_register_now()
 
 
-@when(parsers.parse("I fill the user information"))
+@when(parsers.parse("I register on jpetstore demo application"))
 def login_standard_user(driver):
     """This method is used to register with user information"""
     global credential
     credential = Registration(driver).user_information()
     Registration(driver).account_information()
     Registration(driver).profile_information()
+    Registration(driver).click_save_account_information()
 
 
-@then("I navigate to jpetstore demo home page")
+@then("I validate the home page")
 def validate_home_page(driver):
     """This method is used to validate page navigation"""
-    Registration(driver).click_save_account_information()
     assert driver.current_url == Constant.HOME_PAGE_URL
 
 
@@ -51,12 +51,12 @@ def select_pet(driver, count):
         Shopping(driver).click_pets_category()
         Shopping(driver).click_pets_subcategory()
         Shopping(driver).click_specific_pet()
-        Cart(driver).click_add_card()
+        Cart(driver).click_add_to_cart_button()
     elif count == "second":
         Shopping(driver).click_pets_category()
         Shopping(driver).click_pets_subcategory()
         Shopping(driver).click_specific_pet()
-        Cart(driver).click_add_card()
+        Cart(driver).click_add_to_cart_button()
     else:
         try:
             raise StepDefinitionNotFoundError
@@ -70,13 +70,13 @@ def return_main_menu(driver):
     Shopping(driver).click_return_to_main_menu()
 
 
-@then("I validate the total amount")
+@when("I validate the total cost")
 def calculate_total_price(driver):
     """This method is used to calculate the pets price and compare with total price"""
     Cart(driver).calculate_the_price()
 
 
-@then("I order the pets")
+@when("I order the pets")
 def order_the_pets(driver):
     """This method used to confirm the order"""
     Cart(driver).click_checkout_button()
@@ -84,7 +84,7 @@ def order_the_pets(driver):
     Confirm(driver).click_confirm_button()
 
 
-@then("I validate my order is placed")
+@then("I validate the order status")
 def verify_order(driver):
     """This method used to verify my order is placed"""
     Confirm(driver).verify_confirmation_message()

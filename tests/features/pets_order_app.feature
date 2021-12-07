@@ -3,16 +3,16 @@ Feature: Order pets randomly
   Background:
     Given The jpetstore demo login page is displayed
 
-  Scenario: Verify the registration page and page navigation
+  Scenario: Verify the page navigates to the home page when registering on jpetstore demo application
     When I click the register link
-    And  I fill the user information
-    Then I navigate to jpetstore demo home page
+    And I register on jpetstore demo application
+    Then I validate the home page
 
-  Scenario: Verify random pets selection and check my order statues
+  Scenario: Verify order status when random pets are added
     When I login with valid credential
     And I add the first pet to the cart
     And I return to the home page
     And I add the second pet to the cart
-    Then I validate the total amount
+    And I validate the total cost
     And I order the pets
-    And I validate my order is placed
+    Then I validate the order status

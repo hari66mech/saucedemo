@@ -36,34 +36,38 @@ class Shopping:
 
     @property
     def get_pet_subcategory_length(self):
-        pets_sub_list_length = len(self.select_sub_pets_category)
-        return pets_sub_list_length
+        return len(self.select_sub_pets_category)
+
+    @property
+    def get_pet_category_length(self):
+        return len(self.select_pets_category)
+
+    @property
+    def get_specific_pet_length(self):
+        return len(self.select_specific_pet)
 
     def click_pets_category(self):
         """This method is used to click the pet category using random function"""
-        pets_list_element = self.select_pets_category
-        length_of_pet_category = len(pets_list_element)
-        specific_category = str(random.randint(2, length_of_pet_category))
+        specific_category = str(random.randint(2, self.get_pet_category_length))
         self.driver.find_element_by_xpath(self.pet_category_loc.format(specific_category)).click()
 
     def click_pets_subcategory(self):
         """This method is used to click the pets subcategory using random function"""
-        length_of_subcategory = self.get_pet_subcategory_length
         pets_list = []
-        pets_sub_list = self.select_sub_pets_category
-        for pet in pets_sub_list:
-            pets_list.append(pet.text)
-        pet = pets_list[random.randrange(1, length_of_subcategory)]
-        self.driver.find_element_by_xpath(self.pet_subcategory_loc.format(pet)).click()
+        pets_subcategory_list = self.select_sub_pets_category
+        for pet_id in pets_subcategory_list:
+            pets_list.append(pet_id.text)
+        pet_id = pets_list[random.randrange(1, self.get_pet_subcategory_length)]
+        self.driver.find_element_by_xpath(self.pet_subcategory_loc.format(pet_id)).click()
 
     def click_specific_pet(self):
         """This method is used to click the pet using random function"""
         selected_pets_list = []
         pets_list = self.select_specific_pet
-        for pet in pets_list:
-            selected_pets_list.append(pet.text)
-        if len(selected_pets_list) > 1:
-            specific_pet = selected_pets_list[random.randrange(1, len(selected_pets_list))]
+        for pet_id in pets_list:
+            selected_pets_list.append(pet_id.text)
+        if self.get_specific_pet_length > 1:
+            specific_pet = selected_pets_list[random.randrange(1, self.get_specific_pet_length)]
         else:
             specific_pet = selected_pets_list[0]
         self.driver.find_element_by_xpath(self.specific_pet_loc.format(specific_pet)).click()

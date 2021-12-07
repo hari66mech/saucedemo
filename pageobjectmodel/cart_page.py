@@ -30,7 +30,7 @@ class Cart:
         """This property used to find the checkout button XPath"""
         return self.driver.find_element(*self.proceed_to_checkout_loc)
 
-    def click_add_card(self):
+    def click_add_to_cart_button(self):
         """This method is used to add the pets to cart"""
         self.add_cart.click()
 
