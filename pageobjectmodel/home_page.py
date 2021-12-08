@@ -33,8 +33,7 @@ class Home:
         random_list = []
         for item_position in range(1, self.total_items + 1):
             random_list.append(item_position)
-        random_list = random.sample(random_list, count)
-        return random_list
+        return random.sample(random_list, count)
 
     def add_to_cart(self, items):
         """This method is used to add items to cart"""
