@@ -54,8 +54,7 @@ class Shopping:
     def click_pets_subcategory(self):
         """This method is used to click the pets subcategory using random function"""
         pets_list = []
-        pets_subcategory_list = self.select_sub_pets_category
-        for pet_id in pets_subcategory_list:
+        for pet_id in self.select_sub_pets_category:
             pets_list.append(pet_id.text)
         pet_id = pets_list[random.randrange(1, self.get_pet_subcategory_length)]
         self.driver.find_element_by_xpath(self.pet_subcategory_loc.format(pet_id)).click()
@@ -63,8 +62,7 @@ class Shopping:
     def click_specific_pet(self):
         """This method is used to click the pet using random function"""
         selected_pets_list = []
-        pets_list = self.select_specific_pet
-        for pet_id in pets_list:
+        for pet_id in self.select_specific_pet:
             selected_pets_list.append(pet_id.text)
         if self.get_specific_pet_length > 1:
             specific_pet = selected_pets_list[random.randrange(1, self.get_specific_pet_length)]

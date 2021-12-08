@@ -40,10 +40,8 @@ class Cart:
 
     def calculate_the_price(self):
         """This method is used to calculate the pets price and compare with total price"""
-        pets_price = self.pets_price
-        total_price = self.total_price.text[12:]
         prices = 0
-        for pet_price in pets_price:
+        for pet_price in self.pets_price:
             price = pet_price.text[1:]
             prices = float(price) + prices
-        assert prices == float(total_price)
+        assert prices == float(self.total_price.text[12:])
