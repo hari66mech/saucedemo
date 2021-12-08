@@ -20,7 +20,9 @@ class Sign_in:
         return self.driver.find_element(*self.create_an_account_button_loc)
 
     def enter_email_id(self):
+        """This method is used to enter email_id"""
         self.email.send_keys(self.fake.email())
 
     def click_account_create_button(self):
+        """This method is used to click account create button"""
         self.create_an_account.click()
