@@ -3,6 +3,7 @@ Feature: saucedemo items shopping
   Background:
     Given The saucedemo_login page is displayed
 
+  @add
   Scenario: Verify the quantity on the cart page.
     When I login as an standard user
     And I validate the home page

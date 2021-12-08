@@ -39,6 +39,7 @@ def remove_an_item(driver):
 @when("I click the continue_shopping button on cart page")
 def click_continue_shopping_button(driver):
     """This method is used to click continue shopping button"""
+    Cart(driver).validate_the_cart_page()
     Cart(driver).click_continue_shopping()
 
 

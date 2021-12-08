@@ -43,7 +43,10 @@ class Cart(Home):
         random_item = str(random.randrange(1, self.total_added_items+1))
         self.driver.find_element_by_xpath(self.added_items_loc.format(random_item)).click()
 
+    def validate_the_cart_page(self):
+        """This method is used to validate the cart page"""
+        assert self.cart_page_title.text == Sauce_constant.CART_PAGE_TITLE
+
     def click_continue_shopping(self):
         """This method is used to click continue shopping button"""
-        assert self.cart_page_title.text == Sauce_constant.CART_PAGE_TITLE
         self.continue_shopping.click()

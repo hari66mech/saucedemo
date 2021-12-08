@@ -16,15 +16,17 @@ class Home:
         return self.driver.find_elements(*self.items_list_loc)
 
     @property
+    def total_item(self):
+        return len(self.items_list)
+
+    @property
     def shopping_icon(self):
         return self.driver.find_element(*self.shopping_icon_loc)
 
     def get_random_list(self, count):
         """This method is used to get total items and create random items list"""
         random_list = []
-        items_list = self.items_list
-        items_count = len(items_list)
-        for item_position in range(1, items_count + 1):
+        for item_position in range(1, self.total_item + 1):
             random_list.append(item_position)
         random_list = random.sample(random_list, count)
         return random_list

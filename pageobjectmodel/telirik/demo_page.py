@@ -27,8 +27,7 @@ class Demo:
         """This method is used to click subcategory under demos"""
         global category_position
         global category_name
-        subcategories_count = len(self.demos_subcategory)
-        category_position = random.randrange(1, subcategories_count)
+        category_position = random.randrange(1, len(self.demos_subcategory))
         category_name = self.driver.find_element_by_xpath(self.subcategory_loc.format(str(category_position)))
         category_name.click()
 
