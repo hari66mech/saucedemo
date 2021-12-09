@@ -2,6 +2,9 @@ import random
 from selenium.webdriver.common.by import By
 from faker import Faker
 from selenium.webdriver.support.select import Select
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 class Account_creation:
@@ -128,24 +131,37 @@ class Account_creation:
         return self.driver.find_element(*self.register_button_loc)
 
     @property
-    def gender_type(self):
+    def gender_options(self):
         return len(self.gender)
 
     def enter_user_name(self, first_name, last_name):
         """This method is used to enter user name on the index page"""
+        try:
+            WebDriverWait(self.driver, 10, poll_frequency=2, ignored_exceptions=[TimeoutException]).until(
+                EC.element_to_be_clickable(self.first_name_loc))
+        except TimeoutException:
+            pass
         self.first_name.send_keys(first_name)
         self.last_name.send_keys(last_name)
 
     def enter_personal_information(self):
         """This method is used to enter personal information on the index page"""
+        password = self.fake.password()
         self.driver.find_element_by_xpath(
-            self.gender_specific_loc.format(str(random.randrange(1, self.gender_type + 1)))).click()
-        self.password.send_keys(self.fake.password())
+            self.gender_specific_loc.format(str(random.randrange(1, self.gender_options + 1)))).click()
+        self.password.send_keys(password)
         Select(self.date_dropdown).select_by_index(random.randrange(2, len(self.total_days)))
         Select(self.month_dropdown).select_by_index(random.randrange(2, len(self.total_months)))
         Select(self.year_dropdown).select_by_index(random.randrange(2, len(self.total_years)))
         self.newsletter_box.click()
         self.specific_offer_box.click()
+        return password
+
+    def keep_credentials(self, mail_id, password):
+        """This method is used to write the credentials in .txt file"""
+        file = open('credentials.txt', 'w')
+        file.write(mail_id+","+password)
+        file.close()
 
     def enter_address_information(self):
         """This method is used to enter address information on the index page"""
@@ -156,7 +172,7 @@ class Account_creation:
         Select(self.state_dropdown).select_by_index(random.randrange(2, len(self.total_states)))
         self.postal_code.send_keys(self.fake.postcode())
         self.additional_information.send_keys(self.fake.text())
-        self.home_phone.send_keys(self.fake.phone_number())
+        self.home_phone.send_keys(self.fake.msisdn())
         self.mobile_phone.send_keys(self.fake.msisdn())
 
     def click_register_button(self):
