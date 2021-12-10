@@ -46,7 +46,8 @@ def click_sign_in_button(driver):
     """This method is used to click the sign_in on the index page"""
     Index(driver).click_signin()
 
-@when("I signin as a user on the sign_in page")
+
+@when("I signin as a user on the signin page")
 def sign_in_action(driver):
     """This method is used to sign in as a user on the sign_in page"""
     Sign_in(driver).get_credentials()

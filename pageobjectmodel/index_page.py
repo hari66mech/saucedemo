@@ -1,5 +1,5 @@
 import random
-from selenium.common.exceptions import ElementClickInterceptedException
+from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
@@ -38,11 +38,12 @@ class Index:
         return self.driver.find_element(*self.checkout_loc)
 
     def click_signin(self):
-        """This method is used to click sign-in button"""
+        """This method is used to check sign-in button is clickable or not with help of the Polling-method and click
+           the sign-in button """
         try:
-            WebDriverWait(self.driver, 20, poll_frequency=2, ignored_exceptions=[ElementClickInterceptedException]).until(
+            WebDriverWait(self.driver, 20, poll_frequency=2, ignored_exceptions=[NoSuchElementException]).until(
                 EC.element_to_be_clickable(self.sign_in_loc))
-        except ElementClickInterceptedException:
+        except NoSuchElementException:
             pass
         self.sign_in.click()
 

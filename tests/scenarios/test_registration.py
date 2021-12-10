@@ -3,15 +3,14 @@ from pageobjectmodel.sign_in_page import Sign_in
 from pageobjectmodel.account_creation_page import Account_creation
 from pageobjectmodel.my_account_page import My_account
 
-scenarios("C:/Users/harikrishna.manokara/PycharmProjects/demo/tests/feature/automationpractice.feature")
+scenarios("C:/Users/harikrishna.manokara/PycharmProjects/demo/tests/feature/registration.feature")
 
 
-@when("I click the create_account button on the sign_in page")
-def register_email_id(driver):
+@when("I create user account on signin page")
+def create_user_account(driver):
     """This method is used to fill mail_id and click account create button on the sign_in page"""
     global mail_id
-    mail_id = Sign_in(driver).enter_email_id()
-    Sign_in(driver).click_account_create_button()
+    mail_id = Sign_in(driver).click_create_an_account()
 
 
 @when(parsers.parse("I fill the user {first_name} and {last_name}"))

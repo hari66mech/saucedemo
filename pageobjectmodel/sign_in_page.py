@@ -34,15 +34,14 @@ class Sign_in:
     def sign_in_button(self):
         return self.driver.find_element(*self.sign_in_button_loc)
 
-    def enter_email_id(self):
-        """This method is used to enter email_id"""
+    def click_create_an_account(self):
+        """This method is used to create an account"""
         mail = self.fake.email()
         self.email.send_keys(mail)
+
+        self.create_an_account.click()
         return mail
 
-    def click_account_create_button(self):
-        """This method is used to click account create button"""
-        self.create_an_account.click()
 
     def get_credentials(self):
         """This method is used to get the credentials in .txt file"""
