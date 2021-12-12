@@ -1,4 +1,6 @@
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 class Product:
@@ -22,14 +24,7 @@ class Product:
         return self.driver.find_element(*self.cart_button_loc)
 
     def click_add_to_cart(self):
-        "This method is used to click add to cart button"
+        "This method is used to click add to cart button and accept the alert message"
         self.add_to_cart.click()
+        WebDriverWait(self.driver, 10).until(EC.alert_is_present())
         self.driver.switch_to.alert.accept()
-
-    def click_cart_button(self):
-        "This method is used to click cart button"
-        self.cart_button.click()
-
-    def click_home_button(self):
-        "This method is used to click home button"
-        self.home_button.click()

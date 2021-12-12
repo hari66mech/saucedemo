@@ -38,20 +38,20 @@ def get_index_page(driver):
 def select_item(driver, category):
     "This method is used to add an item to the cart"
     if category == "mobile":
-        Index(driver).click_mobile_button()
+        Index(driver).phones_button.click()
     elif category == "laptop":
-        Index(driver).click_laptop_button()
+        Index(driver).laptops_button.click()
     elif category == "Monitor":
-        Index(driver).click_monitor_button()
+        Index(driver).monitors_button.click()
     Index(driver).select_item()
     Product(driver).click_add_to_cart()
-    Product(driver).click_home_button()
+    Product(driver).home_button.click()
 
 
 @when("I click place order and fill in the details")
 def fill_the_details(driver):
     "This method is used to fill the user details"
-    Product(driver).click_cart_button()
+    Product(driver).cart_button.click()
     Cart(driver).fill_the_user_details()
 
 

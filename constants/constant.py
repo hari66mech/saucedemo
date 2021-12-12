@@ -4,4 +4,3 @@ class Constant:
     ADDED_ITEM = 1
     THANK_YOU_MESSAGE = "Thank you for your purchase!"
     TOTAL_SELECTED_ITEMS = 3
-

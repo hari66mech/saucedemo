@@ -1,5 +1,7 @@
 from selenium.webdriver.common.by import By
 from faker import Faker
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 class Sign_up:
@@ -25,12 +27,13 @@ class Sign_up:
         return self.driver.find_element(*self.sign_up_button_loc)
 
     def sign_up(self):
-        "This method is used to enter the user data"
+        "This method is used to enter the user data and accept the alert message"
         user_name = self.fake.name()
         user_password = self.fake.password()
         credential = [user_name, user_password]
         self.user_name.send_keys(user_name)
         self.user_password.send_keys(user_password)
         self.sign_up_button.click()
+        WebDriverWait(self.driver, 10).until(EC.alert_is_present())
         self.driver.switch_to.alert.accept()
         return credential

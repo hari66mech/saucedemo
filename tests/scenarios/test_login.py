@@ -10,14 +10,14 @@ scenarios("C:/Users/harikrishna.manokara/PycharmProjects/demoblaze/tests/feature
 def sign_up_action(driver):
     """This method is used to sign_up as a user"""
     global credential
-    Index(driver).click_sign_up_button()
+    Index(driver).signup.click()
     credential = Sign_up(driver).sign_up()
 
 
 @when("I login with valid credential")
 def login_action(driver):
     """This method is used to login with valid user credential"""
-    Index(driver).click_login_button()
+    Index(driver).log_in.click()
     Login(driver).login(credential)
 
 

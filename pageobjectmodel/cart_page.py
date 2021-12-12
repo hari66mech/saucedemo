@@ -1,3 +1,6 @@
+from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from constants.constant import Constant
 from faker import Faker
@@ -91,5 +94,11 @@ class Cart:
         self.ok_button.click()
 
     def validate_total_added_items(self):
-        "This method is used to validate the total added items"
+        """This method is used to validate the total added items
+            and also polling method is used for handling NoSuchElementException for a few seconds"""
+        try:
+            WebDriverWait(self.driver, 20, poll_frequency=2, ignored_exceptions=[NoSuchElementException]).until(
+                EC.element_to_be_clickable(self.total_selected_items_loc))
+        except NoSuchElementException:
+            pass
         assert self.selected_items_count == Constant.TOTAL_SELECTED_ITEMS
