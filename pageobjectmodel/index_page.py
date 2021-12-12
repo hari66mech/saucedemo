@@ -64,7 +64,7 @@ class Index:
             WebDriverWait(self.driver, 20, poll_frequency=2, ignored_exceptions=[NoSuchElementException]).until(
                 EC.element_to_be_clickable(self.name_of_user_loc))
         except NoSuchElementException:
-            pass
+            raise NoSuchElementException
         assert self.name_of_user.text == Constant.WELCOME_MESSAGE+credential[0]
 
     def select_item(self):
@@ -76,5 +76,5 @@ class Index:
             WebDriverWait(self.driver, 20, poll_frequency=2, ignored_exceptions=[NoSuchElementException]).until(
                 EC.presence_of_all_elements_located(self.demoblaze_items_loc))
         except NoSuchElementException:
-            pass
+            raise NoSuchElementException
         self.driver.find_element_by_xpath(selected_item).click()

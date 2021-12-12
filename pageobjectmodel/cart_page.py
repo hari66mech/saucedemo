@@ -100,5 +100,5 @@ class Cart:
             WebDriverWait(self.driver, 20, poll_frequency=2, ignored_exceptions=[NoSuchElementException]).until(
                 EC.element_to_be_clickable(self.total_selected_items_loc))
         except NoSuchElementException:
-            pass
+            raise NoSuchElementException
         assert self.selected_items_count == Constant.TOTAL_SELECTED_ITEMS

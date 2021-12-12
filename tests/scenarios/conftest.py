@@ -43,6 +43,8 @@ def select_item(driver, category):
         Index(driver).laptops_button.click()
     elif category == "Monitor":
         Index(driver).monitors_button.click()
+    else:
+        raise NotImplementedError
     Index(driver).select_item()
     Product(driver).click_add_to_cart()
     Product(driver).home_button.click()
