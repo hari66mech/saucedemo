@@ -26,7 +26,7 @@ class Sign_up:
     def sign_up_button(self):
         return self.driver.find_element(*self.sign_up_button_loc)
 
-    def sign_up(self):
+    def registration(self):
         "This method is used to enter the user data and accept the alert message"
         user_name = self.fake.name()
         user_password = self.fake.password()

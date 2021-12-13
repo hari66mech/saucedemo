@@ -78,7 +78,6 @@ class Cart:
 
     def fill_the_user_details(self):
         "This method is used to fill the user details"
-        self.place_to_add_button.click()
         expire_date = self.fake.credit_card_expire().split("/")
         self.name.send_keys(self.fake.name())
         self.country.send_keys(self.fake.country())

@@ -17,8 +17,11 @@ class Index:
     laptops_button_loc = (By.XPATH, "//div[@id='contcont']//a[text()='Laptops']")
     monitors_button_loc = (By.XPATH, "//div[@id='contcont']//a[text()='Monitors']")
     demoblaze_items_loc = (By.XPATH, "//div[@id='tbodyid']/div")
+    samsung_galaxy_loc = (By.XPATH, "//a[normalize-space()='Samsung galaxy s6']")
+    sony_vaio_loc = (By.XPATH, "//a[normalize-space()='Sony vaio i5']")
+    apple_monitor_loc = (By.XPATH, "//a[normalize-space()='Apple monitor 24']")
     next_button_loc = (By.XPATH, "//button[@id='next2']")
-    selected_item_loc = "//div[@id='tbodyid']/div[{0}]//a"
+    selected_item_loc = "//*[@id='tbodyid']/div[{0}]/div/div/h4/a"
 
     @property
     def signup(self):
@@ -56,22 +59,53 @@ class Index:
     def next_button(self):
         return self.driver.find_element(*self.next_button_loc)
 
-    def validate_welcome_message(self, credential):
-        """This method is used to validate welcome message
-        and also polling method is used for handling NoSuchElementException for a few seconds"""
+    def click_next_button(self):
+        "This method is used to validate the 'next' button with the help of polling method and click the 'next' button"
+        try:
+            WebDriverWait(self.driver, 20, poll_frequency=2, ignored_exceptions=[NoSuchElementException]).until(
+                EC.element_to_be_clickable(self.next_button_loc))
+        except NoSuchElementException:
+            raise NoSuchElementException
+        self.next_button.click()
 
+    def validate_mobile(self):
+        "This method is used to validate all the mobiles are present on the index page"
+        try:
+            WebDriverWait(self.driver, 20, poll_frequency=2, ignored_exceptions=[NoSuchElementException]).until(
+                EC.presence_of_element_located(self.samsung_galaxy_loc))
+        except NoSuchElementException:
+            raise NoSuchElementException
+
+    def validate_laptop(self):
+        "This method is used to validate all the laptops are present on the index page"
+        try:
+            WebDriverWait(self.driver, 20, poll_frequency=2, ignored_exceptions=[NoSuchElementException]).until(
+                EC.presence_of_element_located(self.sony_vaio_loc))
+        except NoSuchElementException:
+            raise NoSuchElementException
+
+    def validate_monitor(self):
+        "This method is used to validate all the monitors are present on the index page"
+        try:
+            WebDriverWait(self.driver, 20, poll_frequency=2, ignored_exceptions=[NoSuchElementException]).until(
+                EC.presence_of_element_located(self.apple_monitor_loc))
+        except NoSuchElementException:
+            raise NoSuchElementException
+
+    def verify_user_welcome_message(self, credential):
+        """This method is used to validate the welcome message
+        and also polling method is used for handling NoSuchElementException for a few seconds"""
         try:
             WebDriverWait(self.driver, 20, poll_frequency=2, ignored_exceptions=[NoSuchElementException]).until(
                 EC.element_to_be_clickable(self.name_of_user_loc))
         except NoSuchElementException:
             raise NoSuchElementException
-        assert self.name_of_user.text == Constant.WELCOME_MESSAGE+credential[0]
+        assert self.name_of_user.text == Constant.WELCOME_MESSAGE + credential[0]
 
     def select_item(self):
-        """This method is used to fill the user details
+        """This method is used to select the item
            and also polling method is used for handling NoSuchElementException for a few seconds"""
-
-        selected_item = self.selected_item_loc.format(random.randrange(1, self.total_items+1))
+        selected_item = self.selected_item_loc.format(random.randrange(1, self.total_items + 1))
         try:
             WebDriverWait(self.driver, 20, poll_frequency=2, ignored_exceptions=[NoSuchElementException]).until(
                 EC.presence_of_all_elements_located(self.demoblaze_items_loc))
