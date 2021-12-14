@@ -96,7 +96,7 @@ class Cart:
         """This method is used to validate the total added items
             and also polling method is used for handling NoSuchElementException for a few seconds"""
         try:
-            WebDriverWait(self.driver, 20, poll_frequency=2, ignored_exceptions=[NoSuchElementException]).until(
+            WebDriverWait(self.driver, 20).until(
                 EC.element_to_be_clickable(self.total_selected_items_loc))
         except NoSuchElementException:
             raise NoSuchElementException

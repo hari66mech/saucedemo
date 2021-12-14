@@ -26,13 +26,10 @@ class Sign_up:
     def sign_up_button(self):
         return self.driver.find_element(*self.sign_up_button_loc)
 
-    def registration(self):
+    def registration(self, credential):
         "This method is used to enter the user data and accept the alert message"
-        user_name = self.fake.name()
-        user_password = self.fake.password()
-        credential = [user_name, user_password]
-        self.user_name.send_keys(user_name)
-        self.user_password.send_keys(user_password)
+        self.user_name.send_keys(credential["user_name"])
+        self.user_password.send_keys(credential["user_password"])
         self.sign_up_button.click()
         WebDriverWait(self.driver, 10).until(EC.alert_is_present())
         self.driver.switch_to.alert.accept()

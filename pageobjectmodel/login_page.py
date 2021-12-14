@@ -26,6 +26,6 @@ class Login:
 
     def login(self, credential):
         "This method is used to login as a valid user"
-        self.user_name.send_keys(credential[0])
-        self.user_password.send_keys(credential[1])
+        self.user_name.send_keys(credential["user_name"])
+        self.user_password.send_keys(credential["user_password"])
         self.login_button.click()

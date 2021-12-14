@@ -1,9 +1,11 @@
 import random
+import polling as polling
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from constants.constant import Constant
+from polling2 import TimeoutException
 
 
 class Index:
@@ -26,6 +28,18 @@ class Index:
     @property
     def signup(self):
         return self.driver.find_element(*self.sign_up_loc)
+
+    @property
+    def samsung_galaxy(self):
+        return self.driver.find_element(*self.samsung_galaxy_loc)
+
+    @property
+    def sony_vaio(self):
+        return self.driver.find_element(*self.sony_vaio_loc)
+
+    @property
+    def apple_monitor(self):
+        return self.driver.find_element(*self.apple_monitor_loc)
 
     @property
     def log_in(self):
@@ -62,33 +76,29 @@ class Index:
     def click_next_button(self):
         "This method is used to validate the 'next' button with the help of polling method and click the 'next' button"
         try:
-            WebDriverWait(self.driver, 20, poll_frequency=2, ignored_exceptions=[NoSuchElementException]).until(
-                EC.element_to_be_clickable(self.next_button_loc))
+            polling.poll(lambda: self.next_button, step=2, timeout=20)
         except NoSuchElementException:
             raise NoSuchElementException
         self.next_button.click()
 
-    def validate_mobile(self):
-        "This method is used to validate all the mobiles are present on the index page"
+    def validate_samsung_galaxy_mobile(self):
+        "This method is used to validate the samsung_galaxy mobile is present on the index page"
         try:
-            WebDriverWait(self.driver, 20, poll_frequency=2, ignored_exceptions=[NoSuchElementException]).until(
-                EC.presence_of_element_located(self.samsung_galaxy_loc))
+            polling.poll(lambda: self.samsung_galaxy, step=2, timeout=20)
+        except TimeoutException:
+            raise NoSuchElementException
+
+    def validate_sony_vaio_laptop(self):
+        "This method is used to validate the sony_vaio laptop is present on the index page"
+        try:
+            polling.poll(lambda: self.sony_vaio, step=2, timeout=20)
         except NoSuchElementException:
             raise NoSuchElementException
 
-    def validate_laptop(self):
-        "This method is used to validate all the laptops are present on the index page"
+    def validate_apple_monitor(self):
+        "This method is used to validate the apple_monitor is present on the index page"
         try:
-            WebDriverWait(self.driver, 20, poll_frequency=2, ignored_exceptions=[NoSuchElementException]).until(
-                EC.presence_of_element_located(self.sony_vaio_loc))
-        except NoSuchElementException:
-            raise NoSuchElementException
-
-    def validate_monitor(self):
-        "This method is used to validate all the monitors are present on the index page"
-        try:
-            WebDriverWait(self.driver, 20, poll_frequency=2, ignored_exceptions=[NoSuchElementException]).until(
-                EC.presence_of_element_located(self.apple_monitor_loc))
+            polling.poll(lambda: self.apple_monitor, step=2, timeout=20)
         except NoSuchElementException:
             raise NoSuchElementException
 
@@ -96,19 +106,18 @@ class Index:
         """This method is used to validate the welcome message
         and also polling method is used for handling NoSuchElementException for a few seconds"""
         try:
-            WebDriverWait(self.driver, 20, poll_frequency=2, ignored_exceptions=[NoSuchElementException]).until(
+            WebDriverWait(self.driver, 20).until(
                 EC.element_to_be_clickable(self.name_of_user_loc))
         except NoSuchElementException:
             raise NoSuchElementException
-        assert self.name_of_user.text == Constant.WELCOME_MESSAGE + credential[0]
+        assert self.name_of_user.text == Constant.WELCOME_MESSAGE + credential["user_name"]
 
     def select_item(self):
         """This method is used to select the item
            and also polling method is used for handling NoSuchElementException for a few seconds"""
         selected_item = self.selected_item_loc.format(random.randrange(1, self.total_items + 1))
         try:
-            WebDriverWait(self.driver, 20, poll_frequency=2, ignored_exceptions=[NoSuchElementException]).until(
-                EC.presence_of_all_elements_located(self.demoblaze_items_loc))
+            polling.poll(lambda: self.demoblaze_items, step=2, timeout=20)
         except NoSuchElementException:
             raise NoSuchElementException
         self.driver.find_element_by_xpath(selected_item).click()

@@ -1,4 +1,4 @@
-from pytest_bdd import scenarios, when, then
+from pytest_bdd import scenarios, when, then, parsers
 from pageobjectmodel.cart_page import Cart
 from pageobjectmodel.index_page import Index
 from pageobjectmodel.product_page import Product
@@ -9,32 +9,27 @@ scenarios("C:/Users/harikrishna.manokara/PycharmProjects/demoblaze/tests/feature
 
 
 @when("I register as a user")
-def sign_up_action(driver):
+def sign_up_action(driver, credential):
     """This method is used to sign_up as a user"""
-    global credential
     Index(driver).signup.click()
-    credential = Sign_up(driver).registration()
+    Sign_up(driver).registration(credential)
 
 
 @then("I validate the user is logged in")
-def verify_user_welcome_message(driver):
+def verify_user_welcome_message(driver, credential):
     "This method is used to validate the user is logged in"
     Index(driver).log_in.click()
     Login(driver).login(credential)
     Index(driver).verify_user_welcome_message(credential)
 
 
-@when("I validate items added to the cart")
-def validate_item(driver):
-    """This method is used to valid item"""
+@when(parsers.parse("I validate {item} added to the cart"))
+def validate_selected_items(driver, item):
     Product(driver).cart_button.click()
-    Cart(driver).validate_added_item()
-    Product(driver).home_button.click()
-
-
-@when("I validate added items")
-def validate_total_items(driver):
-    """This method is used to validate total items"""
-    Product(driver).cart_button.click()
-    Cart(driver).validate_total_added_items()
+    if item == "an_item":
+        Cart(driver).validate_added_item()
+    elif item == "three_items":
+        Cart(driver).validate_total_added_items()
+    else:
+        raise NotImplementedError
     Product(driver).home_button.click()
