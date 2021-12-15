@@ -76,13 +76,13 @@ class Cart:
         "This method is used to validate the added item"
         assert self.selected_items_count == Constant.ADDED_ITEM
 
-    def fill_the_user_details(self):
+    def fill_the_user_details(self, credential):
         "This method is used to fill the user details"
-        expire_date = self.fake.credit_card_expire().split("/")
-        self.name.send_keys(self.fake.name())
-        self.country.send_keys(self.fake.country())
-        self.city.send_keys(self.fake.city())
-        self.credit_card.send_keys(self.fake.credit_card_number())
+        expire_date = credential["expire_date"].split("/")
+        self.name.send_keys(credential["user_name"])
+        self.country.send_keys(credential["country"])
+        self.city.send_keys(credential["city"])
+        self.credit_card.send_keys(credential["credit_card_number"])
         self.month.send_keys(expire_date[0])
         self.year.send_keys(expire_date[1])
         self.purchase_button.click()

@@ -13,9 +13,9 @@ Feature: Shopping
     Then I validate the success message
 
   Scenario: Verify the success message when multiple category items the checkout
-    When I add an item to the cart from the mobile
-    And I add an item to the cart from the laptop
-    And I add an item to the cart from the Monitor
+    When I add an item to the cart from the mobile category
+    And I add an item to the cart from the laptop category
+    And I add an item to the cart from the Monitor category
     And I validate three_items added to the cart
     And I click the cart button
     And I click the place_order button

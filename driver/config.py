@@ -8,4 +8,5 @@ class Config:
     FIREFOX_DRIVER_PATH = USER_HOME + 'driver' + os.path.sep + 'geckodriver.exe'
     MS_EDGE_DRIVER_PATH = USER_HOME + 'driver' + os.path.sep + 'msedgedriver.exe'
     # chrome, firefox, msedge
-    DRIVER = "chrome"
+    DRIVER = "msedge"
+    HEADLESS = False

@@ -10,27 +10,35 @@ from pageobjectmodel.cart_page import Cart
 from msedge.selenium_tools import Edge, EdgeOptions
 
 
+class BrowserError(Exception):
+    def __init__(self, value):
+        self.value = value
+
+
 @pytest.fixture
 def driver():
     """This method is used to open and close the driver"""
     try:
         if Config.DRIVER == "chrome":
             chromeOptions = webdriver.ChromeOptions()
-            chromeOptions.add_argument('--headless')
+            if Config.HEADLESS:
+                chromeOptions.add_argument('--headless')
             driver = webdriver.Chrome(Config.CHROME_DRIVER_PATH, chrome_options=chromeOptions)
         elif Config.DRIVER == "firefox":
             fireFoxOptions = webdriver.FirefoxOptions()
-            fireFoxOptions.add_argument('--headless')
+            if Config.HEADLESS:
+                fireFoxOptions.add_argument('--headless')
             driver = webdriver.Firefox(executable_path=Config.FIREFOX_DRIVER_PATH, firefox_options=fireFoxOptions)
         elif Config.DRIVER == "msedge":
             edge_options = EdgeOptions()
             edge_options.use_chromium = True
-            edge_options.add_argument('--headless')
+            if Config.HEADLESS:
+                edge_options.add_argument('--headless')
             driver = Edge(executable_path=Config.MS_EDGE_DRIVER_PATH, options=edge_options)
         else:
-            raise RuntimeError
-    except RuntimeError:
-        pass
+            raise BrowserError(Config.DRIVER + " browser is not found")
+    except BrowserError:
+        driver.quit()
     driver.maximize_window()
     driver.implicitly_wait(10)
     yield driver
@@ -43,7 +51,11 @@ def credential(driver):
     fake = Faker()
     credential = {
         "user_name": fake.name(),
-        "user_password": fake.password()
+        "user_password": fake.password(),
+        "country": fake.country(),
+        "city": fake.city(),
+        "credit_card_number": fake.credit_card_number(),
+        "expire_date": fake.credit_card_expire()
     }
     return credential
 
@@ -66,7 +78,7 @@ def add_item(driver, category):
     Product(driver).home_button.click()
 
 
-@when(parsers.parse("I add an item to the cart from the {category}"))
+@when(parsers.parse("I add an item to the cart from the {category} category"))
 def add_item_with_category(driver, category):
     "This method is used to add a given category item to the cart"
     if category == "mobile":
@@ -97,9 +109,9 @@ def click_specific_button(driver, action):
 
 
 @when("I fill the user_info for placing an order")
-def fill_the_details(driver):
+def fill_the_details(driver, credential):
     "This method is used to fill the user details"
-    Cart(driver).fill_the_user_details()
+    Cart(driver).fill_the_user_details(credential)
 
 
 @then("I validate the success message")
