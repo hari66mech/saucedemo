@@ -5,7 +5,7 @@ class Home:
     def __init__(self, driver):
         self.driver = driver
 
-    my_account_loc = (By.XPATH, "//i[@class='fa fa-user']")
+    my_account_loc = (By.XPATH, "//span[normalize-space()='My Account']")
     register_loc = (By.XPATH, "//ul[@class='dropdown-menu dropdown-menu-right']//a[normalize-space()='Register']")
 
     @property

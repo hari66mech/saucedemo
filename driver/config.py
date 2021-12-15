@@ -9,3 +9,4 @@ class Config:
     MS_EDGE_DRIVER_PATH = USER_HOME + 'driver' + os.path.sep + 'msedgedriver.exe'
     # chrome, firefox, msedge
     DRIVER = "chrome"
+    HEADLESS = False

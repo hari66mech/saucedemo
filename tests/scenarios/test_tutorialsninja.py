@@ -17,8 +17,8 @@ def click_button(driver, action):
         raise NotImplementedError
 
 
-@when("I register as a user")
-def account_registration(driver, credential):
+@when("I register as a new user")
+def user_registration(driver, credential):
     """This method is used to register as a user"""
     Register(driver).register(credential)
 
