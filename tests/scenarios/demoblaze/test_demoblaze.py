@@ -5,13 +5,14 @@ from pageobjectmodel.product_page import Product
 from pageobjectmodel.sign_up_page import Sign_up
 from pageobjectmodel.login_page import Login
 
-scenarios("C:/Users/harikrishna.manokara/PycharmProjects/demoblaze/tests/features")
+scenarios("C:/Users/harikrishna.manokara/PycharmProjects/demoblaze/tests/features/demoblaze")
 
 
 @when("I register as a user")
 def sign_up_action(driver, credential):
     """This method is used to sign_up as a user"""
     Index(driver).signup.click()
+    Sign_up(driver).keep_credentials(credential)
     Sign_up(driver).registration(credential)
 
 
@@ -19,7 +20,7 @@ def sign_up_action(driver, credential):
 def verify_user_welcome_message(driver, credential):
     "This method is used to validate the user is logged in"
     Index(driver).log_in.click()
-    Login(driver).login(credential)
+    Login(driver).login()
     Index(driver).verify_user_welcome_message(credential)
 
 

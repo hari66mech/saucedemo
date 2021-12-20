@@ -1,12 +1,9 @@
 from selenium.webdriver.common.by import By
-from faker import Faker
 
 
 class Login:
     def __init__(self, driver):
         self.driver = driver
-
-    fake = Faker()
 
     user_name_loc = (By.XPATH, "//input[@id='loginusername']")
     password_loc = (By.XPATH, "//input[@id='loginpassword']")
@@ -24,8 +21,11 @@ class Login:
     def login_button(self):
         return self.driver.find_element(*self.login_button_loc)
 
-    def login(self, credential):
-        "This method is used to login as a valid user"
-        self.user_name.send_keys(credential["user_name"])
-        self.user_password.send_keys(credential["user_password"])
+    def login(self):
+        "This method is used to login as a stored(credentials.txt) credentials"
+        file = open("credentials.txt", "r")
+        credentials = file.read().split(",")
+        file.close()
+        self.user_name.send_keys(credentials[0])
+        self.user_password.send_keys(credentials[1])
         self.login_button.click()

@@ -3,14 +3,11 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from constants.constant import Constant
-from faker import Faker
 
 
 class Cart:
     def __init__(self, driver):
         self.driver = driver
-
-    fake = Faker()
 
     total_selected_items_loc = (By.XPATH, "//tbody[@id='tbodyid']/tr")
     place_to_add_button_loc = (By.XPATH, "//button[normalize-space()='Place Order']")

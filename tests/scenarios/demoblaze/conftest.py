@@ -1,5 +1,4 @@
 import pytest
-from faker import Faker
 from pytest_bdd import given, when, parsers, then
 from selenium import webdriver
 from driver.config import Config
@@ -8,9 +7,10 @@ from pageobjectmodel.index_page import Index
 from pageobjectmodel.product_page import Product
 from pageobjectmodel.cart_page import Cart
 from msedge.selenium_tools import Edge, EdgeOptions
+from factorie_data.credential_factory import CredentialFactory
 
 
-class BrowserError(Exception):
+class DriverError(Exception):
     def __init__(self, value):
         self.value = value
 
@@ -25,10 +25,10 @@ def driver():
                 chromeOptions.add_argument('--headless')
             driver = webdriver.Chrome(Config.CHROME_DRIVER_PATH, chrome_options=chromeOptions)
         elif Config.DRIVER == "firefox":
-            fireFoxOptions = webdriver.FirefoxOptions()
+            firefoxOptions = webdriver.FirefoxOptions()
             if Config.HEADLESS:
-                fireFoxOptions.add_argument('--headless')
-            driver = webdriver.Firefox(executable_path=Config.FIREFOX_DRIVER_PATH, firefox_options=fireFoxOptions)
+                firefoxOptions.add_argument('--headless')
+            driver = webdriver.Firefox(executable_path=Config.FIREFOX_DRIVER_PATH, firefox_options=firefoxOptions)
         elif Config.DRIVER == "msedge":
             edge_options = EdgeOptions()
             edge_options.use_chromium = True
@@ -36,8 +36,8 @@ def driver():
                 edge_options.add_argument('--headless')
             driver = Edge(executable_path=Config.MS_EDGE_DRIVER_PATH, options=edge_options)
         else:
-            raise BrowserError(Config.DRIVER + " browser is not found")
-    except BrowserError:
+            raise DriverError("the {driverName} driver is not found".format(driverName=Config.DRIVER))
+    except DriverError:
         driver.quit()
     driver.maximize_window()
     driver.implicitly_wait(10)
@@ -47,15 +47,15 @@ def driver():
 
 @pytest.fixture()
 def credential(driver):
-    """This method is used to generate credential"""
-    fake = Faker()
+    """This method is used to call the factory boy credential"""
+    data = CredentialFactory()
     credential = {
-        "user_name": fake.name(),
-        "user_password": fake.password(),
-        "country": fake.country(),
-        "city": fake.city(),
-        "credit_card_number": fake.credit_card_number(),
-        "expire_date": fake.credit_card_expire()
+        "user_name": data.name,
+        "user_password": data.password,
+        "country": data.country,
+        "city": data.city,
+        "credit_card_number": data.credit_card_number,
+        "expire_date": data.credit_card_expiry_date
     }
     return credential
 
