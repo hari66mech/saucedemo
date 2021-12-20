@@ -7,9 +7,12 @@ from constant.constant import Constant
 from driver.config import Config
 
 
-class BrowserError(Exception):
+class DriverError(Exception):
     def __init__(self, value):
         self.value = value
+
+
+fake = Faker()
 
 
 @pytest.fixture
@@ -22,10 +25,10 @@ def driver():
                 chromeOptions.add_argument('--headless')
             driver = webdriver.Chrome(Config.CHROME_DRIVER_PATH, chrome_options=chromeOptions)
         elif Config.DRIVER == "firefox":
-            fireFoxOptions = webdriver.FirefoxOptions()
+            firefoxOptions = webdriver.FirefoxOptions()
             if Config.HEADLESS:
-                fireFoxOptions.add_argument('--headless')
-            driver = webdriver.Firefox(executable_path=Config.FIREFOX_DRIVER_PATH, firefox_options=fireFoxOptions)
+                firefoxOptions.add_argument('--headless')
+            driver = webdriver.Firefox(executable_path=Config.FIREFOX_DRIVER_PATH, firefox_options=firefoxOptions)
         elif Config.DRIVER == "msedge":
             edge_options = EdgeOptions()
             edge_options.use_chromium = True
@@ -33,8 +36,8 @@ def driver():
                 edge_options.add_argument('--headless')
             driver = Edge(executable_path=Config.MS_EDGE_DRIVER_PATH, options=edge_options)
         else:
-            raise BrowserError(Config.DRIVER + " browser is not found")
-    except BrowserError:
+            raise DriverError("the {driverName} driver is not found".format(driverName=Config.DRIVER))
+    except DriverError:
         driver.quit()
     driver.maximize_window()
     driver.implicitly_wait(10)
@@ -45,9 +48,8 @@ def driver():
 @pytest.fixture
 def fake_text(driver):
     """This method is used to get fake text from the Faker module"""
-    fake = Faker()
     text = {"text": fake.text()
-    }
+            }
     return text
 
 

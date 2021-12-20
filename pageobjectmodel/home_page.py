@@ -10,12 +10,12 @@ class Home:
     def __init__(self, driver):
         self.driver = driver
 
-    apple_cinema_30_loc = (By.XPATH, "//a[contains(text(),'Apple Cinema 30')]")
+    apple_cinema_loc = (By.XPATH, "//a[contains(text(),'Apple Cinema 30')]")
     total_items_loc = (By.XPATH, "//div[@class='product-layout col-lg-3 col-md-3 col-sm-6 col-xs-12']//a[text()]")
 
     @property
-    def apple_cinema_30(self):
-        return self.driver.find_element(*self.apple_cinema_30_loc)
+    def apple_cinema(self):
+        return self.driver.find_element(*self.apple_cinema_loc)
 
     @property
     def total_items(self):

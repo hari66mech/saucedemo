@@ -15,6 +15,11 @@ class Product:
     file_upload_loc = (By.XPATH, "//button[@id='button-upload222']")
     add_to_cart_button_loc = (By.XPATH, "//button[@id='button-cart']")
     success_message_loc = (By.XPATH, "//div[contains(text(),'Success')]")
+    input_loc = (By.XPATH, "//div[6]/input")
+
+    @property
+    def input(self):
+        return self.driver.find_element(*self.input_loc)
 
     @property
     def item_size(self):
@@ -62,7 +67,7 @@ class Product:
         self.driver.find_element_by_xpath(self.checkbox_loc.format(1, self.total_checkbox + 1)).click()
         self.driver.find_element_by_xpath(self.selected_colour_loc.format(1, self.total_colours + 1)).click()
         self.text_area.send_keys(fake_text["text"])
-        self.file_upload.send_keys(r"C:\Music\hth.txt")
+        self.input.Keys(r"C:\Music\hth.txt")
         self.add_to_cart_button.click()
 
     def verify_success_message(self):
