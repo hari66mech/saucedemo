@@ -1,0 +1,12 @@
+class Constant:
+    HOME_PAGE_URL = "https://www.nextgenerationautomation.com/"
+    SUCCESS_MESSAGE = "Success! Your member signup request has been sent and is awaiting approval. The site administrator will notify you via email ({}) once your request has been approved."
+    WHY_CHOOSE_US_TEXT = "Why Choose Us ?"
+    MEET_OUR_FOUNDER_TEXT = "Meet Our Founder"
+    OUR_KEY_SERVICES_TEXT = "Our Key Services"
+    OVERSEAS_HIRING_MODEL_TEXT = "Overseas Hiring Model"
+    PLACEMENTS_TEXT = "Placements"
+    APPLY_INDIAN_OPENING_TEXT = "Grow India Model Job Openings"
+    VIDEO_LIBRARY_TEXT = "Video Library"
+    BLOG_SECTION_TEXT = "BLOGS SECTION"
+    SIGN_UP_TEXT = "Sign Up"
