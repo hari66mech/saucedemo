@@ -14,7 +14,8 @@ def driver():
         'browser_version': 'latest',
         'os': 'Windows',
         'name': 'phptravels Test',
-        'build': 'BStack Build Number 1'
+        'build': 'BStack Build Number 1',
+        'browserstack.local': 'true'
     }
     driver = webdriver.Remote(
         command_executor='https://hari_cDyQgX:KK4yDhfEoVqqS9sXoBBh@hub-cloud.browserstack.com/wd/hub',
